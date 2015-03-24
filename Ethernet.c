@@ -2,7 +2,7 @@
  * Ethernet.c
  *
  * Created: 2015-03-04 11:56:56 PM
- *  Author: John
+ *  Author: John, Dennis Haase
  */ 
 
 void ETHERNET_init(void);
@@ -29,7 +29,7 @@ void ETHERNET_init(void)
 * \parameter *ip Point to an array[4] within other code to store the pulled informtaion.
 * \parameter val The Array Select number (0-1)
 *
-* This function returns the stored values into the array[4] specified
+* This function returns 1 if successful, 0 if not.
 */
 inline uint8_t eth_get_ip(uint8_t *ip,uint8_t val)
 {
@@ -42,8 +42,9 @@ inline uint8_t eth_get_ip(uint8_t *ip,uint8_t val)
 		*ip=ether_val[val].destination_IP[2];
 		ip++;
 		*ip=ether_val[val].destination_IP[3];
-		return *ip;
+		return 1;
 	}	
+	return 0;
 }
 
 /**
@@ -55,7 +56,7 @@ inline uint8_t eth_get_ip(uint8_t *ip,uint8_t val)
 * \parameter *ip Point to an array[4] within other code to pull information from.
 * \parameter val The Array Select number (0-1)
 *
-* This function does not return anything.
+* This function returns 1 if successful, 0 if not.
 */
 inline uint8_t eth_set_ip(uint8_t *ip,uint8_t val)
 {
@@ -68,8 +69,9 @@ inline uint8_t eth_set_ip(uint8_t *ip,uint8_t val)
 		ether_val[val].destination_IP[2]=*ip;
 		ip++;
 		ether_val[val].destination_IP[3]=*ip;
-		ip++;
+		return 1;
 	}
+	return 0;
 }
 
 /**
@@ -81,7 +83,7 @@ inline uint8_t eth_set_ip(uint8_t *ip,uint8_t val)
 * \parameter *mac Point to an array[6] within other code to pull information from.
 * \parameter val The Array Select number (0-1)
 *
-* This function returns the stored values into the array[6] specified
+* * This function returns 1 if successful, 0 if not.
 */
 inline uint8_t eth_get_mac(uint8_t *mac,uint8_t val)
 {
@@ -98,9 +100,9 @@ inline uint8_t eth_get_mac(uint8_t *mac,uint8_t val)
 		*mac=mac_val[val].MAC[4];
 		mac++;
 		*mac=mac_val[val].MAC[5];
-		mac++;
-		return *mac;
+		return 1;
 	}
+	return 0;
 }
 
 /**
@@ -112,7 +114,7 @@ inline uint8_t eth_get_mac(uint8_t *mac,uint8_t val)
 * \parameter *mac Point to an array[6] within other code to pull information from.
 * \parameter val The Array Select number (0-1)
 *
-* This function does not return anything.
+* This function returns 1 if successful, 0 if not.
 */
 inline uint8_t eth_set_mac(uint8_t *mac,uint8_t val)
 {
@@ -129,7 +131,7 @@ inline uint8_t eth_set_mac(uint8_t *mac,uint8_t val)
 		mac_val[val].MAC[4]=*mac;
 		mac++;
 		mac_val[val].MAC[5]=*mac;
-		mac++;
-		
+		return 1;
 	}
+	return 0;
 }
